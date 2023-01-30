@@ -30,6 +30,7 @@
  */
 
 import './towns.html';
+import {loadAndSortTowns} from './functions.js'; 
 
 const homeworkContainer = document.querySelector('#app');
 
@@ -39,8 +40,9 @@ const homeworkContainer = document.querySelector('#app');
  Массив городов пожно получить отправив асинхронный запрос по адресу
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
-function loadTowns() {
-  return loadAndSortTowns();
+  
+ function loadTowns() {
+  return loadAndSortTowns(); 
 }
 
 /*
