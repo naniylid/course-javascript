@@ -19,9 +19,41 @@ import './dnd.html';
 
 const homeworkContainer = document.querySelector('#app');
 
-document.addEventListener('mousemove', (e) => {});
+function random(from, to) {
+  return parseInt(from + Math.random() * to - from);
+}
+let currentDrug;
+let startX = 0;
+let startY = 0;
 
-export function createDiv() {}
+document.addEventListener('mousemove', (e) => {
+  if (currentDrug) {
+    currentDrug.style.top = e.clientY - startY + 'px';
+    currentDrug.style.left = e.clientX - startX + 'px';
+  }
+});
+
+export function createDiv() {
+  const div = document.createElement('div');
+  const minSize = 20;
+  const maxSize = 200;
+  const maxColor = 0xffffff;
+
+  div.className = 'draggable-div';
+  div.style.background = '#' + random(0, maxColor).toString(16);
+  div.style.top = random(0, window.innerHeight) + 'px';
+  div.style.left = random(0, window.innerWidth) + 'px';
+  div.style.width = random(minSize, maxSize) + 'px';
+  div.style.height = random(minSize, maxSize) + 'px';
+
+  div.addEventListener('mousedown', (e) => {
+    currentDrug = div;
+    startX = e.offsetX;
+    startY = e.offsetY;
+  });
+  div.addEventListener('mouseup', () => (currentDrug = false));
+  return div;
+}
 
 const addDivButton = homeworkContainer.querySelector('#addDiv');
 
